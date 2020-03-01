@@ -19,7 +19,7 @@ class Home extends Component {
     render() {
         console.log('render');
         return (
-            <div className="container">
+            <div className>
                 <h4 style={{ paddingTop: '10px' }}>Home</h4>
                 <p>Welcome, {localStorage.getItem('name')} <Link to="#" onClick={this.onLogout.bind(this)}>Logout</Link></p>
                 <Books />

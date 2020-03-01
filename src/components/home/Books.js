@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-// import BookItem from './BookItem';
-import DetailBook from './DetailBook';
+import CardProduct from './CardProduct';
+import DetailProduct from './DetailProduct'
+// import BookItem from './BookItem';   
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { getProducts, detailProducts } from '../redux/actions/product';
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap';
+
+
+
 class Books extends Component {
     constructor(props) {
         super(props);
@@ -87,31 +91,26 @@ class Books extends Component {
     }
 
     render() {
-        const { products } = this.props;
-        const selectProduct = (e) => {
-            e.preventDefault()
-            this.actSelectProduct(products)
+        const dataProduct = this.props.products.map((item, index) => {
+            return (
 
-        }
+                < CardProduct product={item} key={index} selectProductItem={this.actSelectProduct} />
+
+            )
+        })
         return (
             <div className="row">
-                {products.map((product, index, ) =>
-
-                    <div key={index} selectProduct={this.actSelectProduct}>
-                        <Card style={{ width: '18rem' }} className="mt-1">
-                            <Card.Img variant="top" src={product.image} />
-                            <Card.Body>
-                                <Card.Title>{product.name}</Card.Title>
-                                <Card.Text>
-                                    {product.price}||{product.stock}
-                                </Card.Text>
-                                <Button className="cart" variant="primary" onClick={selectProduct}>cart</Button>
-                            </Card.Body>
-                        </Card>
+                <div className="col-md-8">
+                    <div className="row">
+                        {dataProduct}
                     </div>
-                )}
-                <div className="col sm-4">
-                    <DetailBook product={this.state.selectProduct} />
+                </div>
+                <div className="col-4">
+                    <div className="card shadow" className="cardCart">
+                        <div className="card-body">
+                            <DetailProduct product={this.state.selectProduct} />
+                        </div>
+                    </div>
                 </div>
             </div>
         )

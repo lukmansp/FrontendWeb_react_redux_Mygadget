@@ -2,6 +2,15 @@
     width: 100%;
     height: 140px;
 }
+.cardCart{
+    margin-top: -150px;
+     width: -200px;
+      height: 870px;
+    background-color: #f1f1f1;
+}
+.row{
+    margin-left: 10px;
+}
 .product{
     background-color: #eff2f5;
 }
