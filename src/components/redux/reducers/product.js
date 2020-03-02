@@ -72,13 +72,15 @@ const product = (state = initialState, action) => {
                 ...state
             }
         case 'UPDATE_PRODUCT_FULFILLED':
+            console.log(action.payload)
             const newProductAfterUpdate = state.products.map(product => {
-                if (product.id === action.payload.data.id) {
-                    return action.payload.data;
+                if (product.id === action.payload.data.result.id) {
+                    return action.payload.data.result;
                 }
 
                 return product;
             })
+            // console.log(newProductAfterUpdate)
             return {
                 ...state,
                 products: newProductAfterUpdate

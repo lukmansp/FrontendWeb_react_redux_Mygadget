@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { detailProducts } from '../redux/actions/product';
 
+
 class Navbar extends Component {
 
-    onLogout() {
-        localStorage.removeItem('user-id');
-        localStorage.removeItem('token');
-        localStorage.removeItem('isAuth');
-        this.props.history.push('/login');
-    }
+
     detailProducts = (event) => {
         //console.log(event.target.value)
         this.props.dispatch(detailProducts(event.target.value))
@@ -35,7 +31,7 @@ class Navbar extends Component {
                                 <Link className="nav-link" to="/about"><i className="fas fa-history"></i></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="#" onClick={this.onLogout.bind(this)}><i className="fas fa-sign-out-alt"></i></Link>
+                                <Link className="nav-link" to="#" onClick={this.props.onClick}><i className="fas fa-sign-out-alt"></i></Link>
                             </li>
                             <li className="nav-item">
                                 <input class="form-control mr-sm-2" type="search" name="" onChange={this.detailProducts} placeholder="Search" />

@@ -3,6 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
 // import axios from 'axios'
 import { postProduct } from '../redux/actions/product'
+import { withRouter } from 'react-router-dom'
 class ProductAdd extends Component {
     state = {
         name: "",
@@ -24,7 +25,7 @@ class ProductAdd extends Component {
         })
 
     }
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
         let data = new FormData();
         data.append("name", this.state.name);
@@ -34,12 +35,12 @@ class ProductAdd extends Component {
         data.append("price", this.state.price);
         data.append("stock", this.state.stock);
         // axios.post("http://localhost:9009/product", data);
-        this.props.dispatch(postProduct(data))
-        // console.log(this.data)
-        this.props.onHandleClose()
-        // this.props.history.push("/product")
+        await this.props.dispatch(postProduct(data))
+        this.props.onHide()
+        await this.props.history.push("/product")
     }
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Modal show={this.props.show} onHide={this.props.onHandleClose}>
@@ -85,4 +86,4 @@ class ProductAdd extends Component {
     }
 }
 
-export default connect()(ProductAdd)
+export default withRouter(connect()(ProductAdd))

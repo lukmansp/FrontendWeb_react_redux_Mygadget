@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Table } from 'react-bootstrap';
+import { Container, Col, Row, Button, Table } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
-import { getProducts, detailProducts, deleteProduct } from '../redux/actions/product';
-import { Form } from 'react-bootstrap';
-import ProductAdd from './ProductAdd';
-import productEdit from './productEdit';
+import { getProducts } from '../redux/actions/product';
+import ProductItem from './ProductItem';
+import ProductAdd from './ProductAdd'
+import ProductEdit from './ProductEdit'
+import ProductDelete from './ProductDelete'
+import Navbar from '../layout/Navbar'
 
 class Product extends Component {
     state = {
         show: false,
-        selectBook: null,
         showEdit: false,
+        showDelete: false,
+        selectProduct: null,
+        selectProductDelete: null,
     }
-    onShow = (event) => {
+    componentDidMount() {
+        console.log('componnen didmount')
+        this.getProducts()
+    }
+
+    getProducts = () => {
+        this.props.dispatch(getProducts())
+    }
+    handleShow = () => {
         this.setState({
             show: true
         })
     }
-    onHandleClose = () => {
+
+    handleClose = () => {
         this.setState({
             show: false
         })
@@ -35,6 +48,18 @@ class Product extends Component {
         })
     }
 
+    handleShowDelete = () => {
+        this.setState({
+            showDelete: true
+        })
+    }
+
+    handleCloseDelete = () => {
+        this.setState({
+            showDelete: false
+        })
+    }
+
     onSelectItemProductEdit = (product) => {
         this.setState({
             selectProduct: product,
@@ -42,93 +67,59 @@ class Product extends Component {
         })
     }
 
-    getProducts() {
-        this.props.dispatch(getProducts());
-    }
-
-    detailProducts = (event) => {
-        //console.log(event.target.value)
-        this.props.dispatch(detailProducts(event.target.value))
-        //console.log(this.props);
-    }
-    deleteProduct = (productId) => {
-        this.props.dispatch(deleteProduct(productId))
-
-        // console.log(productId)
-    }
-    componentDidMount() {
-        this.getProducts();
-        // this.detailProducts()
+    onSelectProductDelete = (product) => {
+        this.setState({
+            selectProductDelete: product,
+            showDelete: true
+        })
     }
 
     render() {
-        console.log(this.props);
+        console.log('render product')
         const { products } = this.props;
 
-        return (
-            <Container> <div className="container"></div>
-                <Row style={{ marginTop: "20px", marginBottom: "20px" }}>
-                    <Col sm={10}>
-                        <h4 className="banner">PRODUCTS</h4>
-                    </Col>
-                    <Col sm={2}>
-                        <Button variant="primary" size="sm" onClick={this.onShow} >Add PRODUCT</Button>
-                    </Col>
-                </Row>
-                <Row style={{ marginTop: "20px", marginBottom: "20px" }}>
-                    <Col sm={10}>
-                        <Form>
-                            <Form.Group>
-                                {/* <Form.Label>Search</Form.Label>
-                                <Form.Control type="search" placeholder="Enter name" onChange={this.detailProducts} /> */}
-                                <div class="searchBox">
-                                    <input class="searchInput" type="text" name="" onChange={this.detailProducts} placeholder="Search" />
-                                    <button class="searchButton" href="#">
-                                        <i class="fas fa-search">
-                                        </i>
-                                    </button>
-                                </div>
-                            </Form.Group>
-                        </Form>
-                    </Col>
-                </Row>
-                <Table hover>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>category</th>
-                            <th>Publisher</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product, index) =>
-                            <tr key={index}>
-                                <td>{product.id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.description}</td>
-                                <td>{product.category_name}</td>
-                                <td>{product.price}</td>
-                                <td>{product.stock}</td>
-                                <td> <productEdit show={this.state.showEdit} onHide={this.handleCloseEdit} book={this.state.selectProduct} />||<Button variant="danger" onClick={deleteProduct.bind(this, product.id)}>Delete</Button></td>
+        const itemProduct = products.products.map((product, index) => <ProductItem product={product} key={index} onSelectItemProductEdit={this.onSelectItemProductEdit} onSelectProductDelete={this.onSelectProductDelete} />);
 
+        return (
+            <React.Fragment>
+                <Navbar />
+                <Container style={{ marginTop: "20px" }}>
+                    <Row style={{ marginBottom: "20px" }}>
+                        <Col sm={10}>
+                            <h4>Books</h4>
+                        </Col>
+                        <Col sm={2}>
+                            <Button variant="primary" size="sm" onClick={this.handleShow} >Add Book</Button>
+                        </Col>
+                    </Row>
+                    <Table striped bordered hover size="sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">category</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Actions</th>
                             </tr>
-                        )}
-                    </tbody>
-                </Table>
-                <ProductAdd show={this.state.show} onHandleClose={this.onHandleClose} />
-            </Container>
+                        </thead>
+                        <tbody>
+                            {itemProduct}
+                        </tbody>
+                    </Table>
+                    <ProductAdd show={this.state.show} onHide={this.handleClose} />
+                    <ProductEdit show={this.state.showEdit} onHide={this.handleCloseEdit} product={this.state.selectProduct} />
+                    <ProductDelete show={this.state.showDelete} onHide={this.handleCloseDelete} product={this.state.selectProductDelete} />
+                </Container>
+            </React.Fragment>
         )
     }
-}
 
+}
 const mapStateToProps = (state) => {
-    //console.log(state)
     return {
-        products: state.products.products
+        products: state.products
     }
 }
 

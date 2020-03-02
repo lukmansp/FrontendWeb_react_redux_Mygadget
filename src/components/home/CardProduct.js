@@ -39,7 +39,7 @@ const CardProduct = ({ product, selectProductItem }) => {
 
                     </div>
                 </div> */}
-                <Card style={{ width: '18rem' }} className="mt-1">
+                <Card style={{ width: '18rem' }} className="mt-1" box="shadow">
                     <Card.Img variant="top" src={product.image} />
                     <Card.Body>
                         <Card.Title>{product.name}</Card.Title>

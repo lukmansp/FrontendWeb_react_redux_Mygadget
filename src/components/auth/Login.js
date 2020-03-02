@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Login extends Component{
-    constructor(props){
+class Login extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -11,22 +11,22 @@ class Login extends Component{
         };
     }
 
-    componentDidMount(){
-        if(localStorage.getItem('token')){
+    componentDidMount() {
+        if (localStorage.getItem('token')) {
             this.props.history.push('/');
         }
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name] : e.target.value })
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('hahaa');
+        // console.log('hahaa');
 
         axios
-            .post("http://localhost:8000/user/login", this.state)
+            .post("http://localhost:9009/user/login", this.state)
             .then(res => {
                 console.log(res.data);
                 localStorage.setItem('token', res.data.token);
@@ -39,8 +39,8 @@ class Login extends Component{
             })
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="container">
                 <h4 style={{ marginTop: '10px' }}>Login</h4>
                 <div className="row justify-content-md-center">
@@ -48,7 +48,7 @@ class Login extends Component{
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input type="text" className="form-control" placeholder="Enter email" name="email" onChange={this.onChange}/>
+                                <input type="text" className="form-control" placeholder="Enter email" name="email" onChange={this.onChange} />
                             </div>
                             <div className="form-group">
                                 <label>Password</label>

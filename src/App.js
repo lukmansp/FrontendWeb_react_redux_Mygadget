@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './components/redux/store';
 
-import Navbar from './components/layout/Navbar';
+// import Navbar from './components/layout/Navbar';
 import Home from './components/home/Home';
 import About from './components/about/About';
 import Product from './components/modal/Product';
@@ -15,7 +15,6 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
         <Route exact path="/" component={Home} />
         <Route path="/product" component={Product} />
         <Route path="/about" component={About} />
