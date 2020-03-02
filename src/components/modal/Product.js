@@ -3,12 +3,15 @@ import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 
 import { connect } from 'react-redux';
 import { getProducts, detailProducts, deleteProduct } from '../redux/actions/product';
-import ProductAdd from './ProductAdd'
 import { Form } from 'react-bootstrap';
+import ProductAdd from './ProductAdd';
+import productEdit from './productEdit';
 
 class Product extends Component {
     state = {
-        show: false
+        show: false,
+        selectBook: null,
+        showEdit: false,
     }
     onShow = (event) => {
         this.setState({
@@ -20,9 +23,29 @@ class Product extends Component {
             show: false
         })
     }
+    handleShowEdit = () => {
+        this.setState({
+            showEdit: true
+        })
+    }
+
+    handleCloseEdit = () => {
+        this.setState({
+            showEdit: false
+        })
+    }
+
+    onSelectItemProductEdit = (product) => {
+        this.setState({
+            selectProduct: product,
+            showEdit: true
+        })
+    }
+
     getProducts() {
         this.props.dispatch(getProducts());
     }
+
     detailProducts = (event) => {
         //console.log(event.target.value)
         this.props.dispatch(detailProducts(event.target.value))
@@ -90,7 +113,7 @@ class Product extends Component {
                                 <td>{product.category_name}</td>
                                 <td>{product.price}</td>
                                 <td>{product.stock}</td>
-                                <td><Button variant="warning">Edit</Button>||<Button variant="danger" onClick={deleteProduct.bind(this, product.id)}>Delete</Button></td>
+                                <td> <productEdit show={this.state.showEdit} onHide={this.handleCloseEdit} book={this.state.selectProduct} />||<Button variant="danger" onClick={deleteProduct.bind(this, product.id)}>Delete</Button></td>
 
                             </tr>
                         )}

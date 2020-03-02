@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { detailProducts } from '../redux/actions/product';
 
 class Navbar extends Component {
+
+    onLogout() {
+        localStorage.removeItem('user-id');
+        localStorage.removeItem('token');
+        localStorage.removeItem('isAuth');
+        this.props.history.push('/login');
+    }
+    detailProducts = (event) => {
+        //console.log(event.target.value)
+        this.props.dispatch(detailProducts(event.target.value))
+        //console.log(this.props);
+    }
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+            <nav className="navbar navbar-expand-lg" >
                 <div className="container">
-                    <Link className="navbar-brand" to="#">BookStore</Link>
+                    <Link className="navbar-brand bg-white">BookStore</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -20,6 +33,12 @@ class Navbar extends Component {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/about"><i className="fas fa-history"></i></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="#" onClick={this.onLogout.bind(this)}><i className="fas fa-sign-out-alt"></i></Link>
+                            </li>
+                            <li className="nav-item">
+                                <input class="form-control mr-sm-2" type="search" name="" onChange={this.detailProducts} placeholder="Search" />
                             </li>
                         </ul>
                     </div>

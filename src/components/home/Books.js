@@ -5,7 +5,7 @@ import DetailProduct from './DetailProduct'
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { getProducts, detailProducts } from '../redux/actions/product';
-import { Card, Button } from 'react-bootstrap';
+// import { Card, Button } from 'react-bootstrap';
 
 
 
@@ -106,8 +106,10 @@ class Books extends Component {
                     </div>
                 </div>
                 <div className="col-4">
-                    <div className="card shadow" className="cardCart">
+                    <div className="card shadow cardCart">
                         <div className="card-body">
+                            <p>CART </p>
+                            <hr />
                             <DetailProduct product={this.state.selectProduct} />
                         </div>
                     </div>

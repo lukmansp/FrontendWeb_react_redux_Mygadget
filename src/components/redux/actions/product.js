@@ -43,3 +43,13 @@ export const postProduct = (data) => {
         })
     }
 }
+export const updateProduct = (productId, data) => {
+    return {
+        type: "UPDATE_PRODUCT",
+        payload: axios({
+            method: "PATCH",
+            url: `http://localhost:9009/product/${productId}`,
+            data: data
+        })
+    }
+}

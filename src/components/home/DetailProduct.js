@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Card, Form, Button } from 'react-bootstrap'
+// import { Card, Form, Button } from 'react-bootstrap'
 class DetailProduct extends Component {
     constructor(props) {
         super(props)
@@ -56,11 +56,14 @@ class DetailProduct extends Component {
 
                         <p>
                             <form onSubmit={this.onSubmit}>
-                                <div class="card">
+                                <div class="card cartCard">
                                     <img src={this.props.product.image} class="card-img-top" alt="..." />
                                     <div class="card-body">
-                                        <h5 class="card-title">{this.props.product.name}</h5>
-                                        <p class="card-text">{this.props.product.price}|{this.props.product.stock}</p>
+                                        <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={this.props.product.id} hidden readOnly />
+                                        Name : <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={this.props.product.name} readOnly /><br />
+                                        User:<input onChange={this.onChange} type="text" className="form-control" name="user" placeholder="Enter name" />
+                                        stock:<input onChange={this.onChange} type="text" className="form-control" name="quantity" placeholder="Enter Stock" />
+                                        Price:<input onChange={this.onChange} type="text" className="form-control" name="price" placeholder="Enter name" readOnly value={this.props.product.price} /><hr />
                                         <button className="btn btn-primary">Order</button>
                                     </div>
                                 </div>

@@ -63,6 +63,26 @@ const product = (state = initialState, action) => {
             return {
                 ...state
             }
+        case 'UPDATE_PRODUCT_PENDING':
+            return {
+                ...state
+            }
+        case 'UPDATE_PRODUCT_REJECTED':
+            return {
+                ...state
+            }
+        case 'UPDATE_PRODUCT_FULFILLED':
+            const newProductAfterUpdate = state.products.map(product => {
+                if (product.id === action.payload.data.id) {
+                    return action.payload.data;
+                }
+
+                return product;
+            })
+            return {
+                ...state,
+                products: newProductAfterUpdate
+            }
 
         default:
             return state;
