@@ -7,7 +7,7 @@ import ProductItem from './ProductItem';
 import ProductAdd from './ProductAdd'
 import ProductEdit from './ProductEdit'
 import ProductDelete from './ProductDelete'
-import Navbar from '../layout/Navbar'
+// import Navbar from '../layout/Navbar'
 
 class Product extends Component {
     state = {
@@ -82,7 +82,7 @@ class Product extends Component {
 
         return (
             <React.Fragment>
-                <Navbar />
+                {/* <Navbar /> */}
                 <Container style={{ marginTop: "20px" }}>
                     <Row style={{ marginBottom: "20px" }}>
                         <Col sm={10}>

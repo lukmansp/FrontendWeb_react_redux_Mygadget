@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
 // import { Card, Form, Button } from 'react-bootstrap'
+// import { addQty, reduceQty } from '../redux/actions/cart'
+import { withRouter } from 'react-router-dom'
+import { addQty, reduceQty } from '../redux/actions/cart'
 class DetailProduct extends Component {
     constructor(props) {
         super(props)
@@ -10,93 +14,84 @@ class DetailProduct extends Component {
     }
 
 
-    onChange = (e) => {
-        // console.log(f.target.value);
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+    // onChange = (e) => {
+    //     // console.log(f.target.value);
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
+    // onSubmit = (e) => {
+    //     console.log(this.props)
+    //     e.preventDefault();
+    //     const data = {
+    //         id_product: this.props.product.id,
+    //         user: this.state.user,
+    //         quantity: this.state.quantity,
+    //         price: this.props.product.price,
+    //         total: this.state.total,
+    //         created_at: new Date(),
+    //         updated_at: new Date()
+    //     };
+
+    //     axios({
+    //         method: "POST",
+    //         url: "http://localhost:9009/order/",
+    //         data: data
+    //     })
+    //         .then(response => {
+    //             this.props.history.push('/');
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // }
+    addQuantity = (id) => {
+
+        this.props.dispatch(addQty(id))
     }
 
-    onSubmit = (e) => {
-        console.log(this.props)
-        e.preventDefault();
-        const data = {
-            id_product: this.props.product.id,
-            user: this.state.user,
-            quantity: this.state.quantity,
-            price: this.props.product.price,
-            total: this.state.total,
-            created_at: new Date(),
-            updated_at: new Date()
-        };
+    reduceQuantity = (id) => {
 
-        axios({
-            method: "POST",
-            url: "http://localhost:9009/order/",
-            data: data
-        })
-            .then(response => {
-                this.props.history.push('/');
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        this.props.dispatch(reduceQty(id))
     }
     componentDidMount() {
 
     }
+    // onAddQty = (cart) => {
+    //     cart.quantity = cart.quantity + 1;
+    //     const total = this.state.total + cart.price
+
+    //     this.setState(nextState => ({
+    //         carts: nextState.carts,
+    //         total: total
+    //     }))
+    // }
 
     render() {
-        console.log(this.props.product)
+        const { cart } = this.props
+        console.log(cart)
         return (
             <React.Fragment>
                 <div>
+                    <div>
+                        {/* <form onSubmit={this.onSubmit}> */}
+                        {/* <form> */}
+                        <div class="cartCard">
+                            <img src={cart.image} className="imageCart" alt="..." /> <button size="sm" variant="outline-info" onClick>Remove</button>
+                            <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={cart.id} hidden readOnly />
+                            <p>{cart.name}</p>
+                            <button size="sm" variant="outline-info" onClick={() => (this.reduceQuantity(cart.id))}>-</button>
+                            |{cart.quantity}|
+                                <button size="sm" variant="outline-info" onClick={() => (this.addQuantity(cart.id))}>+</button>
+                        </div>
 
-                    {this.props.product ?
-
-                        <p>
-                            <form onSubmit={this.onSubmit}>
-                                <div class="card cartCard">
-                                    <img src={this.props.product.image} class="card-img-top" alt="..." />
-                                    <div class="card-body">
-                                        <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={this.props.product.id} hidden readOnly />
-                                        Name : <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={this.props.product.name} readOnly /><br />
-                                        User:<input onChange={this.onChange} type="text" className="form-control" name="user" placeholder="Enter name" />
-                                        stock:<input onChange={this.onChange} type="text" className="form-control" name="quantity" placeholder="Enter Stock" />
-                                        Price:<input onChange={this.onChange} type="text" className="form-control" name="price" placeholder="Enter name" readOnly value={this.props.product.price} /><hr />
-                                        <button className="btn btn-primary">Order</button>
-                                    </div>
-                                </div>
-                                {/* <div className="card">
-                                <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={this.props.product.id} hidden readOnly /><br />
-                                Name : <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={this.props.product.name} readOnly /><br />
-
-                                User:<input onChange={this.onChange} type="text" className="form-control" name="user" placeholder="Enter name" />
-                                stock:<input onChange={this.onChange} type="text" className="form-control" name="quantity" placeholder="Enter name" />
-                                Price:<input onChange={this.onChange} type="text" className="form-control" name="price" placeholder="Enter name" readOnly value={this.props.product.price} />
-                                <button className="btn btn-primary">Order</button>
-                            </div> */}
-                                {/* <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src={this.props.product.image} />
-                                <Card.Body>
-                                    <Card.Title><input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={this.props.product.id} hidden readOnly /></Card.Title>
-                                    <Card.Title>{this.props.product.name}</Card.Title>
-                                    <Card.Text>Rp.{this.props.product.price} | Stock {this.props.product.stock}</Card.Text>
-                                    <Card.Text><Form.Control size="sm" type="text" placeholder="Username" onChange={this.onChange} /></Card.Text>
-                                    <Card.Text><Form.Control size="sm" type="text" placeholder="Quantity" onChange={this.onChange} /></Card.Text>
-                                    <Button variant="info">Info</Button>
-                                </Card.Body>
-                            </Card> */}
-                            </form>
-                        </p>
-
-                        :
-                        <p className="btn btn-primary badge badge-pill">Cart</p>
-                    }
-
+                        {/* </form> */}
+                    </div>
                 </div>
             </React.Fragment>
         )
     }
 }
-export default DetailProduct
+
+export default withRouter(connect()(DetailProduct));

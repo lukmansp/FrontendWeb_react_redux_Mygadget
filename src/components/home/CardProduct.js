@@ -1,5 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Card, Button } from 'react-bootstrap'
+import { cartItem } from '../redux/actions/cart'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+// import { getProducts } from '../redux/actions/product';
+
 
 
 // const CardProduct = ({ product }) => {
@@ -15,44 +20,45 @@ import { Card, Button } from 'react-bootstrap'
 // }
 
 
-const CardProduct = ({ product, selectProductItem }) => {
-    const selectProduct = (e) => {
-        e.preventDefault()
-        selectProductItem(product)
+// const CardProduct = ({ product, dispatch, selectProductItem }) => {
 
+//     console.log(cartItem)
+//     const selectProduct = (data) => {
+//         // e.preventDefault()
+//         // selectProductItem(product)
+//         dispatch(cartItem(data))
+
+
+//     }
+class CardProduct extends Component {
+
+    selectProduct = (product) => {
+        product.quantity = 1
+        this.props.dispatch(cartItem(product))
     }
 
+    render() {
+        const { product } = this.props
 
-    return (
-        <React.Fragment>
-            <div className="col-md-4 mt-2">
-                {/* <div className="card">
-                    <div className="card-body">
-                        <img src={product.image} alt="..." className="card-img-top" />
-                        <h5 className="card-title">{product.name}</h5>
-                        <p className="card-text">Price: {product.price} | | Stock : {product.stock}</p><hr></hr>
-                        <div className="buttonCard">
-                            <a className="btn btn-primary badge badge-pill badge-info" onClick={selectProduct}><span className="fas fa-cart-plus" style={{ width: "40px" }}></span></a>
-                            <a className="btn btn-primary badge badge-pill badge-warning"><span className="fas fa-pencil-square-o" style={{ width: "40px" }} data-toggle="modal" data-target="#staticBackdropEdit" onClick={selectProduct}></span></a>
-                            <a className="btn btn-primary badge badge-pill badge-danger" data-toggle="modal" data-target="#staticBackdrop"><span className="fas fa-trash" style={{ width: "40px" }}></span></a>
-                        </div>
+        return (
+            < React.Fragment >
+                <div className="col-md-4 mt-2">
 
-                    </div>
-                </div> */}
-                <Card style={{ width: '18rem' }} className="mt-1" box="shadow">
-                    <Card.Img variant="top" src={product.image} />
-                    <Card.Body>
-                        <Card.Title>{product.name}</Card.Title>
-                        <Card.Text>
-                            Price Rp. {product.price}|| Stock {product.stock}
-                        </Card.Text>
-                        <Button className="cart" variant="primary" onClick={selectProduct}>cart</Button>
-                    </Card.Body>
-                </Card>
-            </div>
+                    <Card style={{ width: '18rem' }} className="mt-1" box="shadow">
+                        <Card.Img variant="top" src={product.image} />
+                        <Card.Body>
+                            <Card.Title>{product.name}</Card.Title>
+                            <Card.Text>
+                                Price Rp. {product.price}|| Stock {product.stock}
+                            </Card.Text>
+                            <Button className="cart" variant="primary" onClick={() => (this.selectProduct(product))}>cart</Button>
+                        </Card.Body>
+                    </Card>
+                </div>
 
 
-        </React.Fragment>
-    )
+            </React.Fragment >
+        )
+    }
 }
-export default CardProduct
+export default withRouter(connect()(CardProduct))

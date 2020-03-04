@@ -3,11 +3,12 @@
     height: 140px;
 }
 .cardCart{
-    margin-top: -180px;
      width: -200px;
       height: 870px;
     background-color: #f1f1f1;
     position: relative;
+    margin-left: 160px;
+    border-radius: 2%;
 }
 .row{
     margin-left: 10px;
@@ -21,6 +22,10 @@
     font-weight: 700;
     line-height: 1.2;
     color: aqua;
+}
+.pagination{
+    margin-top: -250px;
+    margin-left: 250px;
 }
 .searchBox {
     position: absolute;
@@ -70,18 +75,20 @@
     align-items: center;
     transition: 0.4s;
 }
+.buttonCart{
+    margin-left: 60px;
+}
 .navbar-expand-lg{
     background-color: #80b2e7
 }
 .navbar{
-    margin-right: 240px;
 }
 .navbar-brand{
     border-radius: 10px;
 }
 .cartCard{
-    margin-bottom: 170px;
-    margin-top: 120px;
+    margin-bottom: 6px;
+    margin-left: 60px;
 }
 .searchInput {
     border:none;
@@ -93,9 +100,11 @@
     font-size: 16px;
     transition: 0.4s;
     line-height: 30px;
-    width: 0px;
-    
-
+    width: 0px;  
+}
+.imageCart{
+ width: 80px;   
+ height: 80px;   
 }
 .mt-1{
     border-radius: 10px;

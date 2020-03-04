@@ -9,6 +9,7 @@ export const getProducts = () => {
         })
     }
 }
+console.log(getProducts)
 
 export const detailProducts = (event) => {
     return {
@@ -16,6 +17,27 @@ export const detailProducts = (event) => {
         payload: axios({
             method: "GET",
             url: `http://localhost:9009/product?name=${event}`
+
+        })
+    }
+}
+export const categoryProducts = (event) => {
+    return {
+        type: 'CATEGORY_PRODUCT',
+        payload: axios({
+            method: "GET",
+            url: `http://localhost:9009/product?category=${event}`
+
+        })
+    }
+}
+
+export const paginateProducts = (event) => {
+    return {
+        type: 'PAGINATE_PRODUCT',
+        payload: axios({
+            method: "GET",
+            url: `http://localhost:9009/product?pages=${event}`
 
         })
     }

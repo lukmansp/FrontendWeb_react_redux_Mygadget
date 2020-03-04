@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 import Books from './product';
-import Navbar from '../layout/Navbar'
+// import Navbar from '../layout/Navbar'
 // import User from '../user/User'
 
-class Home extends Component {
+class Cashier extends Component {
     componentDidMount() {
         if (!localStorage.getItem('isAuth')) {
             this.props.history.push('/login');
@@ -17,16 +17,15 @@ class Home extends Component {
         localStorage.removeItem('isAuth');
         this.props.history.push('/');
     }
-
     render() {
-        console.log('render');
+        // console.log('render');
         return (
             <div className>
-                <Navbar onClick={this.onLogout.bind(this)} />
+                {/* <Navbar onClick={this.onLogout.bind(this)} /> */}
                 <Books />
             </div>
         )
     }
 }
 
-export default Home;
+export default Cashier;
