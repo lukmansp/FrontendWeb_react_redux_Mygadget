@@ -1,9 +1,16 @@
-export const cartItem = (data) => {
+import axios from 'axios';
+export const addCart = (data) => {
     return {
-        type: 'CART_ITEM',
+        type: 'ADD_CART_DATA',
         payload: data
     }
+}
 
+export const deleteCart = (data) => {
+    return {
+        type: 'DELETE_CART_DATA',
+        payload: data
+    }
 }
 
 export const addQty = (id) => {
@@ -12,17 +19,19 @@ export const addQty = (id) => {
         payload: id
     }
 }
-
 export const reduceQty = (id) => {
     return {
         type: 'REDUCE_QTY',
         payload: id
     }
 }
-
-export const removeQty = (id) => {
+export const postOrder = (data) => {
     return {
-        type: 'REMOVE_QTY',
-        payload: id
+        type: 'POST_ORDER',
+        payload: axios({
+            method: "POST",
+            url: "http://localhost:9009/order",
+            data: data
+        })
     }
 }

@@ -33,7 +33,7 @@ class Login extends Component {
                 localStorage.setItem('user-id', res.data.id);
                 localStorage.setItem('otoritas_id', res.data.otoritas_id);
                 localStorage.setItem('isAuth', true);
-                this.props.history.push('/login');
+                this.props.history.push('/');
             })
 
             .catch(err => {
@@ -43,21 +43,21 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="container">
-                <h4 style={{ marginTop: '10px' }}>Login</h4>
-                <div className="row justify-content-md-center">
-                    <div className="col-md-8">
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <label>Email</label>
-                                <input type="text" className="form-control" placeholder="Enter email" name="email" onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <label>Password</label>
-                                <input type="password" className="form-control" placeholder="Enter password" name="password" onChange={this.onChange} />
-                            </div>
-                            <button type="submit" className="btn btn-primary">Login</button>
-                        </form>
+            <div className="container" style={{ marginTop: "150px", backgroundColor: "aqua" }} >
+                <div className="card">
+                    <div className="row justify-content-md-center">
+                        <div className="col-md-8 my-4">
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-group">
+                                    <input type="email" className="form-control" placeholder="Enter email" name="email" onChange={this.onChange} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Password</label>
+                                    <input type="password" className="form-control" placeholder="Enter password" name="password" onChange={this.onChange} />
+                                </div>
+                                <button type="submit" className="btn btn-primary">Login</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

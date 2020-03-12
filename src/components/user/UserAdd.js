@@ -43,10 +43,10 @@ class UserAdd extends Component {
                             <Form.Control type="password" name="password" onChange={this.onChange} />
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlSelect1">
-                            <Form.Label>Otoritas</Form.Label>
-                            <Form.Control as="select">
-                                <option value="2">Cashier</option>
-                                <option value="1">Admin</option>
+                            <Form.Label>Category</Form.Label>
+                            <Form.Control as="select" name="category_id" onChange={this.onChange}>
+                                <option value={1}>Admin</option>
+                                <option value={2}>Cashier</option>
                             </Form.Control>
                         </Form.Group>
                         <Button variant="primary" size="sm" type="submit">Save</Button>

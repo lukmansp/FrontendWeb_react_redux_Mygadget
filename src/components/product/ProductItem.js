@@ -13,7 +13,7 @@ const ProductItem = ({ product, onSelectItemProductEdit, onSelectProductDelete }
     return (
         <Fragment>
             <tr>
-                <td>{product.id}</td>
+                <td><img src={product.image} className="imageCart" alt="..." /></td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>{product.category_name}</td>

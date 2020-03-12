@@ -1,6 +1,7 @@
 const initialState = {
     products: [],
-    paginate: []
+    paginate: [],
+    order: []
 }
 const product = (state = initialState, action) => {
     //console.log(action.type);
@@ -20,6 +21,20 @@ const product = (state = initialState, action) => {
             return {
                 ...state
             }
+        case 'GET_ORDER_FULFILLED':
+            // console.log(action.payload);
+            return {
+                ...state,
+                order: action.payload.data.result
+            }
+        case 'GET_ORDER_PENDING':
+            return {
+                ...state
+            }
+        case 'GET_ORDER_REJECTED':
+            return {
+                ...state
+            }
         //
         case 'DETAILS_PRODUCT_FULFILLED':
             // console.log(action.payload);
@@ -32,22 +47,6 @@ const product = (state = initialState, action) => {
                 ...state
             }
         case 'DETAILS_PRODUCT_REJECTED':
-            return {
-                ...state
-            }
-        //
-        case 'CATEGORY_PRODUCT_FULFILLED':
-            // console.log(action.payload);
-
-            return {
-                ...state,
-                products: action.payload.data.result
-            }
-        case 'CATEGORY_PRODUCT_PENDING':
-            return {
-                ...state
-            }
-        case 'CATEGORY_PRODUCT_REJECTED':
             return {
                 ...state
             }

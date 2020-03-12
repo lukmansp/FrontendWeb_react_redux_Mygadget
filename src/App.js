@@ -6,10 +6,10 @@ import store from './components/redux/store';
 
 // import Navbar from './components/layout/Navbar';
 import Home from './components/home/Home';
-import About from './components/about/About';
-import Product from './components/modal/Product';
+import History from './components/history/History';
+import Product from './components/product/Product';
 import Login from './components/auth/Login';
-import User from './components/book/User';
+import User from './components/user/User';
 import Cashier from './components/home/Cashier';
 import "./App.css"
 
@@ -20,7 +20,7 @@ function App() {
       <Router>
         <Route exact path="/" component={Home} />
         <Route path="/product" component={Product} />
-        <Route path="/about" component={About} />
+        <Route path="/history" component={History} />
         <Route path="/login" component={Login} />
         <Route path="/user" component={User} />
         <Route path="/cashier" component={Cashier} />

@@ -1,29 +1,49 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import Books from './product';
 import Navbar from '../layout/Navbar'
-// import User from '../user/User'
+import Pagination from './Pagination'
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: [],
+            carts: [],
+            selectProduct: null,
+            category: '',
+            product: '',
+            page: '',
+        }
+    }
     componentDidMount() {
+        // console.log(localStorage.getItem('otoritas_id'))
         if (!localStorage.getItem('isAuth')) {
             this.props.history.push('/login');
         }
+        if (parseInt(localStorage.getItem('otoritas_id')) !== 1) {
+            // console.log(localStorage.getItem('otoritas_id'))
+            this.props.history.push('/cashier')
+        }
     }
+
     onLogout() {
         localStorage.removeItem('user-id');
-        localStorage.removeItem('otoritas_id');
         localStorage.removeItem('token');
         localStorage.removeItem('isAuth');
-        this.props.history.push('/');
+        localStorage.removeItem('otoritas_id');
+        this.props.history.push('/login');
     }
+
 
     render() {
         console.log('render');
         return (
             <div className>
-                <Navbar onClick={this.onLogout.bind(this)} />
+                <Navbar onClick={this.onLogout.bind(this)} category={this.state.category} product={this.state.product} page={this.state.page} />
                 <Books />
+                <Pagination category={this.state.category} product={this.state.product} page={this.state.page} />
+
             </div>
         )
     }

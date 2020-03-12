@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { detailProducts, categoryProducts } from '../redux/actions/product';
+import { detailProducts } from '../redux/actions/product';
+import { withRouter } from 'react-router-dom'
+
 
 
 class Navbar extends Component {
-
-
-    detailProducts = (event) => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: '',
+            product: '',
+            page: ''
+        }
+    }
+    onCategory = (event) => {
+        this.setState({
+            category: event.target.value
+        })
+        this.props.history.push(`?category=${event.target.value}&name=${this.state.product}&pages${this.state.page}`)
+        this.props.dispatch(detailProducts(event.target.value, this.state.product, this.state.page))
+    }
+    onProduct = (event) => {
         //console.log(event.target.value)
-        this.props.dispatch(detailProducts(event.target.value))
-        //console.log(this.props);
+        this.setState({
+            product: event.target.value
+        })
+        this.props.history.push(`?category=${this.state.category}&name=${event.target.value}&pages${this.state.page}`)
+        this.props.dispatch(detailProducts(this.state.category, event.target.value, this.state.page))
+        // console.log(this.state.product);
     }
 
-    categoryProducts = (event) => {
-        //console.log(event.target.value)
-        this.props.dispatch(categoryProducts(event.target.id))
-        //console.log(this.props);
-    }
 
     render() {
         console.log(this.props)
@@ -34,46 +48,37 @@ class Navbar extends Component {
                                 <Link className="nav-link" to="/"><span className="fa fa-fw fa-home"></span></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/product"><i className="fas fa-user-cog"></i></Link>
+                                <Link className="nav-link" to="/product"><i class="fa fa-fw fa-cogs"></i></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/about"><i className="fas fa-history"></i></Link>
+                                <Link className="nav-link" to="/history"><i className="fas fa-history"></i></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/user" onClick={this.props.onClick}>user</Link>
+                                <Link className="nav-link" to="/user"><i className="fas fa-user-cog"></i></Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="#" onClick={this.props.onClick}><i className="fas fa-sign-out-alt"></i></Link>
                             </li>
                             <li className="nav-item">
-                                <input class="form-control mr-sm-2" type="search" name="" onChange={this.detailProducts} placeholder="Search" />
+                                <select onChange={this.onCategory} as="select" className="custom-select badge badge-light">
+                                    <option value="" >Filter...</option>
+                                    <option value="smartphone">Smartphone </option>
+                                    <option value="pc">PC </option>
+                                    <option value="camera">Camera </option>
+                                </select>
                             </li>
                             <li className="nav-item">
-                                <div class="dropdown">
-                                    <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Filter
-                                    </button>
-                                    <div className="dropdown-menu" aria-labelledby="btnGroupDrop1" >
-                                        <a className="dropdown-item" onClick={this.categoryProducts} id="">All </a>
-                                        <a className="dropdown-item" onClick={this.categoryProducts} id="sm">Smartphone </a>
-                                        <a className="dropdown-item" onClick={this.categoryProducts} id="pc">PC </a>
-                                        <a className="dropdown-item" onClick={this.categoryProducts} id="cam">Camera </a>
-                                    </div>
-                                </div>
-
+                                <form onSubmit={this.onProduct}>
+                                    <input class="form-control mr-sm-2" type="search" name="search" onChange={this.onProduct} placeholder="Search" />
+                                </form>
                             </li>
                         </ul>
                     </div>
                 </div >
             </nav >
-            // <nav id="nav-3">
-            //     <Link class="link-3" to="/">Toko Lukmans</Link>
-            //     <Link class="link-3" to="/about">About</Link>
-            //     <Link class="link-3" to="/product">Product</Link>
-            //     <Link class="link-3" to="/">History</Link>
-            // </nav>
+
         )
     }
 }
 
-export default connect()(Navbar);
+export default withRouter(connect()(Navbar));

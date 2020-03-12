@@ -80,12 +80,17 @@ class ProductEdit extends Component {
                             <Form.Control type="text" name="description" onChange={this.onChange} value={this.state.description} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Writer</Form.Label>
+                            <Form.Label>Image</Form.Label>
                             <Form.Control type="file" name="image" onChange={this.onChangeImage} />
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Publisher</Form.Label>
-                            <Form.Control type="text" name="category_id" onChange={this.onChange} value={this.state.category_id} />
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Control as="select" name="category_id" onChange={this.onChange}>
+                                <option value={1}>Smartphone</option>
+                                <option value={2}>Pc</option>
+                                <option value={3}>Smartwatch</option>
+                                <option value={4}>Camera</option>
+                            </Form.Control>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Price</Form.Label>

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import CardProduct from './CardProduct';
-import DetailProduct from './DetailProduct'
-// import BookItem from './BookItem';   
-// import axios from 'axios'
 import { connect } from 'react-redux';
-import { getProducts, detailProducts, paginateProducts } from '../redux/actions/product';
-import { addQty, reduceQty } from '../redux/actions/cart'
+import { getProducts, detailProducts } from '../redux/actions/product';
+import { addQty, reduceQty, deleteCart, postOrder } from '../redux/actions/cart'
+import { Row, Col, Button } from 'react-bootstrap'
 
-// import { Card, Button } from 'react-bootstrap';
 
 
 
@@ -17,7 +14,11 @@ class Books extends Component {
 
         this.state = {
             products: [],
-            selectProduct: null
+            carts: [],
+            selectProduct: null,
+            category: '',
+            product: '',
+            page: '',
         }
     }
     actSelectProduct = (products) => {
@@ -42,14 +43,9 @@ class Books extends Component {
     getProducts() {
         this.props.dispatch(getProducts());
     }
-    detailProducts = (event) => {
-        //console.log(event.target.value)
-        this.props.dispatch(detailProducts(event.target.value))
-        //console.log(this.props);
-    }
+
     componentDidMount() {
         this.getProducts();
-        // this.detailProducts()
     }
     addQuantity = (id) => {
 
@@ -60,22 +56,33 @@ class Books extends Component {
 
         this.props.dispatch(reduceQty(id))
     }
+    deleteCart = (id) => {
+        this.props.dispatch(deleteCart(id))
+    }
     paginateProducts = (event) => {
-        //console.log(event.target.value)
-        this.props.dispatch(paginateProducts(event.target.id))
-        //console.log(this.props);
+
+        this.setState({
+            page: event.target.id
+        })
+        this.props.dispatch(detailProducts(this.state.category, this.state.product, event.target.id))
+    }
+    onSubmit = (e) => {
+        e.preventDefault();
+
+        const data = {
+            id_product: this.props.carts[0].id,
+            user: this.props.carts[0].name,
+            quantity: this.props.carts[0].quantity,
+            price: this.props.carts[0].price,
+            stock: this.props.carts[0].stock,
+
+        }
+        this.props.dispatch(postOrder(data))
     }
 
 
     render() {
-        console.log(this.props)
-        const { cart } = this.props
-        // const itemCart = cart.map((cart) => {
-        //     return (
-        //         <DetailProduct cart={cart} key={cart.id} />
-        //     )
-        // })
-        const { pagination, products } = this.props
+        const { products, carts, total } = this.props
 
         const dataProduct = products.map((item, index) => {
             return (
@@ -85,8 +92,7 @@ class Books extends Component {
             )
         })
         return (
-
-            <React.Fragment>
+            < React.Fragment >
                 <div className="row">
                     <div className="col-md-8">
                         <div className="row">
@@ -95,33 +101,46 @@ class Books extends Component {
                     </div>
                     <div className="col-4">
                         <div className="cardCart">
-                            {cart.map((cart) => (
-                                <div class="cartCard">
-                                    <img src={cart.image} className="imageCart" alt="..." /> <button size="sm" variant="outline-info" onClick>Remove</button>
-                                    <input onChange={this.onChange} type="text" className="form-control" name="id_product" placeholder="Enter name" value={cart.id} hidden readOnly />
-                                    <p>{cart.name}</p>
-                                    <button size="sm" variant="outline-info" onClick={() => (this.reduceQuantity(cart.id))}>-</button>
-                                    |{cart.quantity}|{cart.price}
-                                    <button size="sm" variant="outline-info" onClick={() => (this.addQuantity(cart.id))}>+</button>
-                                </div>
-
+                            <p>.</p>
+                            {carts.map((cart) => (
+                                <Row style={{ marginBottom: "10px", border: "1px solid rgba(0,0,0,.1)", paddingTop: "20px", marginLeft: "0px", marginRight: "0px", paddingBottom: "10px" }}>
+                                    <Col xs={6} md={4} border="info"><img src={cart.image} alt="" width={80} height={80} /></Col>
+                                    <Col xs={6} md={6}>
+                                        <p>{cart.name}</p>
+                                        <Row style={{ marginTop: "10px" }}>
+                                            <Col sm={2}>
+                                                <Button size="sm" variant="outline-info" onClick={() => (this.reduceQuantity(cart.id))}>-</Button>
+                                            </Col>
+                                            <Col sm={2}>{cart.quantity}</Col>
+                                            <Col sm={2}>
+                                                <Button size="sm" variant="outline-info" onClick={() => (this.addQuantity(cart.id))}>+</Button>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Row xs={6} md={2}>
+                                        <Col>
+                                            <p> Rp. {cart.price}</p>
+                                        </Col>
+                                        <Col>
+                                            <Button className="btnCart" size="sm" onClick={deleteCart} variant="danger">Remove</Button>
+                                        </Col>
+                                    </Row>
+                                </Row>
                             ))}
+                            <Row style={{ fontWeight: "bold" }}>
+                                <Col sm={6} style={{ fontSize: "25px" }}>Total: </Col>
+                                <Col sm={6} style={{ fontSize: "25px" }}>Rp. {total}</Col>
+                            </Row>
+                            <Row className="justify-content-center" style={{ marginBottom: "10px" }}>
+                                <Col sm={12}>
+                                    <Button variant="primary" onClick={this.onSubmit} style={{ marginLeft: "100px" }}>ORDER</Button>{' '}
+                                </Col>
+                            </Row>
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <nav aria-label="Page navigation example">
 
-                        <ul className="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            {pagination.map((pagination) => (
-                                <li class="page-item" key={pagination}><a class="page-link" onClick={this.paginateProducts} id={pagination}>{pagination}</a></li>
-                            ))}
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }
@@ -129,7 +148,9 @@ const mapStateToProps = (state) => {
     // console.log(state)
     return {
         products: state.products.products,
-        cart: state.cart.cart,
+        carts: state.carts.carts,
+        total: state.carts.total,
+        deleteCart: state.carts.deleteCart,
         pagination: state.products.paginate
     }
 }
