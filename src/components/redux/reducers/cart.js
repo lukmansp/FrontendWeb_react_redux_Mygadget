@@ -47,14 +47,19 @@ const cart = (state = initialState, action) => {
 
             }
         case 'DELETE_CART_DATA':
-            const filterCartIdForDelete = state.carts.filter(product => product.id !== action.payload)
-            let existedCartDelete = state.carts.find(product => product.id === action.payload)
+            const filterCartIdForDelete = state.carts.filter(
+                product => product.id !== action.payload,
+            );
+            let existedCartDelete = state.carts.find(
+                product => product.id === action.payload,
+            );
             if (existedCartDelete) {
                 return {
                     ...state,
                     carts: filterCartIdForDelete,
-                    total: state.total - existedCartDelete.price * existedCartDelete.quantity
-                }
+                    total:
+                        state.total - existedCartDelete.price * existedCartDelete.quantity,
+                };
             }
         case 'ADD_QTY':
             const addQty = state.carts.map(product => {

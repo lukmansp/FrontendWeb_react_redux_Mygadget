@@ -23,8 +23,6 @@ class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        // console.log('hahaa');
-
         axios
             .post("http://localhost:9009/user/login", this.state)
             .then(res => {
@@ -35,7 +33,6 @@ class Login extends Component {
                 localStorage.setItem('isAuth', true);
                 this.props.history.push('/');
             })
-
             .catch(err => {
                 console.log(err);
             })

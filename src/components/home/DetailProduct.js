@@ -12,7 +12,6 @@ class DetailProduct extends Component {
         }
     }
 
-
     addQuantity = (id) => {
 
         this.props.dispatch(addQty(id))
@@ -26,13 +25,11 @@ class DetailProduct extends Component {
 
     }
 
-
     render() {
         const { carts, total } = this.props
         const listCart = carts.map((product, index) => {
 
         })
-        // console.log(cart)
         return (
             <React.Fragment>
                 <div>
@@ -46,8 +43,6 @@ class DetailProduct extends Component {
                             |{product.quantity}|
                                 <button size="sm" variant="outline-info" onClick={() => (this.addQuantity(product.id))}>+</button>
                         </div>
-
-
                     </div>
                 </div>
             </React.Fragment>

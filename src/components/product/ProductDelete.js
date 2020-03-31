@@ -14,13 +14,11 @@ const ProductDelete = (props) => {
 
     const onDeleteHandle = async (e) => {
         e.preventDefault();
-
         await dispatch(deleteProduct(product.id));
         onHide();
     }
 
     return (
-
         <Modal show={show} onHide={onHide} variant="lg">
             <Modal.Header>
                 <p>Apakah Anda Yakin Ingin Menghapus Book {product ? product.name : ""} ini ?</p>

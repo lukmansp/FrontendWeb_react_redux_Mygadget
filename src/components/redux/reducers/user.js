@@ -5,7 +5,6 @@ const user = (state = initialState, action) => {
     console.log(action.type);
     switch (action.type) {
         case 'GET_USER_FULFILLED':
-            // console.log(action.payload);
             return {
                 ...state,
                 user: action.payload.data.result
@@ -25,7 +24,6 @@ const user = (state = initialState, action) => {
                 ...state,
                 user: newDataUser
             }
-        // console.log(action.payload);
         case 'POST_USER_PENDING':
             return {
                 ...state
@@ -35,7 +33,6 @@ const user = (state = initialState, action) => {
                 ...state
             }
         case 'DELETE_USER_FULFILLED':
-            //console.log(action.payload.data.result);
             const newDataAfterDelete = state.user.filter(user => user.id !== action.payload.data.result)
             return {
                 ...state,

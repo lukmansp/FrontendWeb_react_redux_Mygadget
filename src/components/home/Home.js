@@ -17,12 +17,10 @@ class Home extends Component {
         }
     }
     componentDidMount() {
-        // console.log(localStorage.getItem('otoritas_id'))
         if (!localStorage.getItem('isAuth')) {
             this.props.history.push('/login');
         }
         if (parseInt(localStorage.getItem('otoritas_id')) !== 1) {
-            // console.log(localStorage.getItem('otoritas_id'))
             this.props.history.push('/cashier')
         }
     }
@@ -43,7 +41,6 @@ class Home extends Component {
                 <Navbar onClick={this.onLogout.bind(this)} category={this.state.category} product={this.state.product} page={this.state.page} />
                 <Books />
                 <Pagination category={this.state.category} product={this.state.product} page={this.state.page} />
-
             </div>
         )
     }

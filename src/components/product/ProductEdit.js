@@ -8,7 +8,7 @@ class ProductEdit extends Component {
     state = {
         name: "",
         description: "",
-        image: "", // null
+        image: "",
         category_id: "",
         price: "",
         stock: ""
@@ -22,7 +22,6 @@ class ProductEdit extends Component {
         this.setState({
             name: product.name,
             description: product.description,
-            //image: product.image,
             category_id: product.category_id,
             price: product.price,
             stock: product.stock
@@ -62,6 +61,7 @@ class ProductEdit extends Component {
             await this.props.onHide();
         }
     }
+
     render() {
         const { show, onHide } = this.props;
         return (

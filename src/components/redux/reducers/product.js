@@ -4,7 +4,6 @@ const initialState = {
     order: []
 }
 const product = (state = initialState, action) => {
-    //console.log(action.type);
     switch (action.type) {
         case 'GET_PRODUCTS_FULFILLED':
             console.log(action.payload);
@@ -22,7 +21,6 @@ const product = (state = initialState, action) => {
                 ...state
             }
         case 'GET_ORDER_FULFILLED':
-            // console.log(action.payload);
             return {
                 ...state,
                 order: action.payload.data.result
@@ -35,9 +33,8 @@ const product = (state = initialState, action) => {
             return {
                 ...state
             }
-        //
+
         case 'DETAILS_PRODUCT_FULFILLED':
-            // console.log(action.payload);
             return {
                 ...state,
                 products: action.payload.data.result
@@ -50,16 +47,16 @@ const product = (state = initialState, action) => {
             return {
                 ...state
             }
+
+
         case 'PAGINATE_PRODUCT_FULFILLED':
-            // console.log(action.payload);
             return {
                 ...state,
                 products: action.payload.data.result
             }
-        //
+
 
         case 'DELETE_PRODUCT_FULFILLED':
-            //console.log(action.payload.data.result);
             const newDataAfterDelete = state.products.filter(product => product.id !== action.payload.data.result)
             return {
                 ...state,
@@ -73,7 +70,7 @@ const product = (state = initialState, action) => {
             return {
                 ...state
             }
-        //
+
 
         case 'POST_PRODUCT_FULFILLED':
             const newDataProduct = [...state.products, action.payload.data.result];
@@ -81,7 +78,6 @@ const product = (state = initialState, action) => {
                 ...state,
                 products: newDataProduct
             }
-        // console.log(action.payload);
         case 'POST_PRODUCT_PENDING':
             return {
                 ...state
@@ -90,7 +86,7 @@ const product = (state = initialState, action) => {
             return {
                 ...state
             }
-        //
+
 
         case 'UPDATE_PRODUCT_PENDING':
             return {
@@ -109,13 +105,11 @@ const product = (state = initialState, action) => {
 
                 return product;
             })
-            // console.log(newProductAfterUpdate)
             return {
                 ...state,
                 products: newProductAfterUpdate
             }
         case 'GET_PAGINATE_FULFILLED':
-            // console.log(action.payload);
             return {
                 ...state,
                 products: action.payload.data.paginate

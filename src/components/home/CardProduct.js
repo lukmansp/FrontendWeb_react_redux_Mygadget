@@ -13,11 +13,9 @@ class CardProduct extends Component {
 
     render() {
         const { product } = this.props
-
         return (
             < React.Fragment >
                 <div className="col-md-4 mt-2">
-
                     <Card style={{ width: '18rem' }} className="mt-1">
                         <Card.Img variant="top" src={product.image} />
                         <Card.Body>
@@ -30,8 +28,6 @@ class CardProduct extends Component {
                         </Card.Body>
                     </Card>
                 </div>
-
-
             </React.Fragment >
         )
     }

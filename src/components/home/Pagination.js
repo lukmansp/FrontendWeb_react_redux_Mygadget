@@ -19,9 +19,9 @@ class Pagination extends Component {
         })
         this.props.dispatch(detailProducts(this.state.category, this.state.product, event.target.id))
     }
+
     render() {
         const { pagination } = this.props
-
         return (
             < React.Fragment >
                 <div className="row">
@@ -36,14 +36,11 @@ class Pagination extends Component {
                         </ul>
                     </nav>
                 </div>
-
-
             </React.Fragment >
         )
     }
 }
 const mapStateToProps = (state) => {
-    // console.log(state)
     return {
         pagination: state.products.paginate
     }

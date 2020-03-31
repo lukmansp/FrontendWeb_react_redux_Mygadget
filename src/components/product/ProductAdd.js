@@ -19,7 +19,6 @@ class ProductAdd extends Component {
         })
     }
     onChangeImage = event => {
-        // console.log(event.target.files[0])
         this.setState({
             image: event.target.files[0]
         })
@@ -34,13 +33,12 @@ class ProductAdd extends Component {
         data.append("category_id", this.state.category_id);
         data.append("price", this.state.price);
         data.append("stock", this.state.stock);
-        // axios.post("http://localhost:9009/product", data);
         await this.props.dispatch(postProduct(data))
         this.props.onHide()
         await this.props.history.push("/product")
     }
-    render() {
 
+    render() {
         return (
             <div>
                 <Modal show={this.props.show} onHide={this.props.onHandleClose}>

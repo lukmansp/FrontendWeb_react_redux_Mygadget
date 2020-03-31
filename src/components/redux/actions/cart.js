@@ -6,12 +6,12 @@ export const addCart = (data) => {
     }
 }
 
-export const deleteCart = (data) => {
+export const deleteCart = data => {
     return {
         type: 'DELETE_CART_DATA',
-        payload: data
-    }
-}
+        payload: data,
+    };
+};
 
 export const addQty = (id) => {
     return {
