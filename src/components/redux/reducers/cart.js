@@ -1,6 +1,3 @@
-/* eslint-disable no-fallthrough */
-
-
 const initialState = {
     carts: [],
     total: 0
@@ -11,7 +8,6 @@ const cart = (state = initialState, action) => {
             return {
                 ...state
             }
-        // console.log(action.payload);
         case 'POST_ORDER_PENDING':
             return {
                 ...state

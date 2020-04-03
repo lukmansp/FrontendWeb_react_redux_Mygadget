@@ -29,5 +29,3 @@ export {
     store,
     persistor
 }
-
-export default store;

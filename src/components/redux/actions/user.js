@@ -1,11 +1,11 @@
 import axios from 'axios';
-
+import 'dotenv/config'
 export const getUser = () => {
     return {
         type: 'GET_USER',
         payload: axios({
             method: "GET",
-            url: "http://localhost:9009/user"
+            url: process.env.REACT_APP_URL + "/user"
         })
     }
 }
@@ -14,7 +14,7 @@ export const postUser = (data) => {
         type: 'POST_USER',
         payload: axios({
             method: "POST",
-            url: "http://localhost:9009/user/register",
+            url: process.env.REACT_APP_URL + "/user/register",
             data: data
         })
     }
@@ -25,7 +25,7 @@ export const deleteUser = (UserId) => {
         type: 'DELETE_USER',
         payload: axios({
             method: 'DELETE',
-            url: `http://localhost:9009/user/${UserId}`
+            url: process.env.REACT_APP_URL + `/user/${UserId}`
 
         })
 

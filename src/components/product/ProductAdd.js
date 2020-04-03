@@ -59,14 +59,18 @@ class ProductAdd extends Component {
                                 <Form.Label>Image</Form.Label>
                                 <Form.Control type="file" placeholder="Enter name" onChange={this.onChangeImage} />
                             </Form.Group>
-                            <Form.Group controlId="exampleForm.ControlSelect1">
+                            {/* <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>Category</Form.Label>
                                 <Form.Control as="select" name="category_id" onChange={this.onChange}>
-                                    <option value={1}>Smartphone</option>
-                                    <option value={2}>Pc</option>
-                                    <option value={3}>Smartwatch</option>
-                                    <option value={4}>Camera</option>
+                                    <option value="1">Smartphone</option>
+                                    <option value="2">Pc</option>
+                                    <option value="3">Smartwatch</option>
+                                    <option value="4">Camera</option>
                                 </Form.Control>
+                            </Form.Group> */}
+                            <Form.Group>
+                                <Form.Label>Category</Form.Label>
+                                <Form.Control type="text" placeholder="Enter category" name="category_id" onChange={this.onChangeValue} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Price</Form.Label>

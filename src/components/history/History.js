@@ -8,9 +8,7 @@ import Navbar from '../layout/Navbar'
 
 class History extends Component {
 
-
     componentDidMount() {
-        // console.log('componnen didmount')
         this.getOrder()
     }
 

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './components/redux/store';
 
-// import Navbar from './components/layout/Navbar';
 import Home from './components/home/Home';
 import History from './components/history/History';
 import Product from './components/product/Product';

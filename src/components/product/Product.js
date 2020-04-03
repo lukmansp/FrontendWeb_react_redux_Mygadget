@@ -18,7 +18,6 @@ class Product extends Component {
         selectProductDelete: null,
     }
     componentDidMount() {
-        // console.log('componnen didmount')
         this.getProducts()
     }
 
@@ -81,16 +80,14 @@ class Product extends Component {
         this.props.history.push('/login');
     }
     paginateProducts = (event) => {
-        //console.log(event.target.value)
         this.props.dispatch(paginateProducts(event.target.id))
-        //console.log(this.props);
     }
+
+
     render() {
         console.log('render product')
         const { pagination, products } = this.props;
-
         const itemProduct = products.products.map((product, index) => <ProductItem product={product} key={index} onSelectItemProductEdit={this.onSelectItemProductEdit} onSelectProductDelete={this.onSelectProductDelete} />);
-
         return (
             <React.Fragment>
                 <Navbar onClick={this.onLogout.bind(this)} />

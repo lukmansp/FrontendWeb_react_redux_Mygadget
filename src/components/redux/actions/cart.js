@@ -1,4 +1,5 @@
 import axios from 'axios';
+import 'dotenv/config'
 export const addCart = (data) => {
     return {
         type: 'ADD_CART_DATA',
@@ -30,7 +31,7 @@ export const postOrder = (data) => {
         type: 'POST_ORDER',
         payload: axios({
             method: "POST",
-            url: "http://localhost:9009/order",
+            url: process.env.REACT_APP_URL + "/order",
             data: data
         })
     }

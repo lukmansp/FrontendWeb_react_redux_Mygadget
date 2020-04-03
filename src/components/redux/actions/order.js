@@ -1,11 +1,11 @@
 import axios from 'axios';
-
+import 'dotenv/config'
 export const getOrder = () => {
     return {
         type: 'GET_ORDER',
         payload: axios({
             method: "GET",
-            url: "http://localhost:9009/order/"
+            url: process.env.REACT_APP_URL + "/order/"
         })
     }
 }
