@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { connect } from 'react-redux'
+import { login } from '../redux/actions/user'
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -21,21 +22,23 @@ class Login extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
-        axios
-            .post("http://54.242.170.33/user/login", this.state)
-            .then(res => {
-                console.log(res.data);
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('user-id', res.data.id);
-                localStorage.setItem('otoritas_id', res.data.otoritas_id);
-                localStorage.setItem('isAuth', true);
-                this.props.history.push('/');
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        // axios
+        //     .post("http://54.242.170.33/user/login", this.state)
+        //     .then(res => {
+        //         console.log(res.data);
+        //         localStorage.setItem('token', res.data.token);
+        //         localStorage.setItem('user-id', res.data.id);
+        //         localStorage.setItem('otoritas_id', res.data.otoritas_id);
+        //         localStorage.setItem('isAuth', true);
+        //         this.props.history.push('/');
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+        await this.props.dispatch(login(this.state))
+        this.props.history.push('/')
     }
 
     render() {
@@ -61,5 +64,9 @@ class Login extends Component {
         )
     }
 }
-
-export default Login;
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    }
+}
+export default connect(mapStateToProps)(Login);

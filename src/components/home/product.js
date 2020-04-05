@@ -77,7 +77,7 @@ class Books extends Component {
             })
         })
         const data = {
-            id_user: this.props.carts[0].name,
+            id_user: this.props.user.persistLogin.name,
             total: this.props.total,
             product: product
 
@@ -173,8 +173,8 @@ class Books extends Component {
 
 }
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
+        user: state.user,
         products: state.products.products,
         carts: state.carts.carts,
         total: state.carts.total,

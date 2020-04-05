@@ -1,9 +1,36 @@
 const initialState = {
-    user: []
+    isAuthenticated: false,
+    user: [],
+    persistLogin: {}
 }
 const user = (state = initialState, action) => {
     console.log(action.type);
     switch (action.type) {
+        case 'LOGIN_USER_PENDING':
+            return {
+                ...state,
+                isAuthenticated: false,
+                persistLogin: {}
+            }
+        case 'LOGIN_USER_REJECTED':
+            return {
+                ...state,
+                isAuthenticated: false,
+                persistLogin: {}
+            }
+        case 'LOGIN_USER_FULFILLED':
+            console.log('perslogin', state.persistLogin)
+            return {
+                ...state,
+                isAuthenticated: true,
+                persistLogin: action.payload.data
+            }
+        case 'LOGOUT_USER':
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: {}
+            }
         case 'GET_USER_FULFILLED':
             return {
                 ...state,

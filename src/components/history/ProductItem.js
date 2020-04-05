@@ -1,18 +1,17 @@
 import React, { Fragment } from 'react';
 const ProductItem = ({ order }) => {
-
+    console.log('order', order)
 
     return (
         <Fragment>
             <tr>
-                <td>{order.id}</td>
+                <td>{order.id_order}</td>
                 <td>{order.name}</td>
-                <td>{order.stock}</td>
-                <td>{order.user}</td>
-                <td>{order.quantity}</td>
+                <td>{order.id_user}</td>
                 <td>{order.price}</td>
+                <td>{order.quantity}</td>
                 <td>{order.total}</td>
-                <td>{order.updated_at}</td>
+                <td>{order.created_at}</td>
 
             </tr>
         </Fragment>
