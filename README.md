@@ -1,5 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequist 
+* clone https://https://github.com/lukmansp/FrontendWeb_react_redux_Mygadget/
+* npm install
+* create new file .env in route folder
+```
+REACT_APP_URL:"localhost:9009"
+```
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -11,6 +20,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### Feature
+* Loign with authorization user with persist
+* Insert, update, delete and search product
+* Order product
+* Manajemen User
+* History order
+
 
 ### `npm test`
 
