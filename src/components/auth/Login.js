@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux'
-import { login } from '../redux/actions/user'
+import { login } from '../redux/actions/authpersist'
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -12,11 +12,11 @@ class Login extends Component {
         };
     }
 
-    componentDidMount() {
-        if (localStorage.getItem('token')) {
-            this.props.history.push('/');
-        }
-    }
+    // componentDidMount() {
+    //     if (localStorage.getItem('token')) {
+    //         this.props.history.push('/');
+    //     }
+    // }
 
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })

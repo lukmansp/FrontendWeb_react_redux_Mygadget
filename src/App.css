@@ -21,7 +21,9 @@
 .row{
     margin-left: 10px;
 }
-
+.chartHistory{
+height: 70%;
+}
 .product{
     background-color: #eff2f5;
 }

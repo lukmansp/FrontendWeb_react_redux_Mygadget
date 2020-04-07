@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Books from './product';
 import Navbar from '../layout/Navbar'
 import Pagination from './Pagination'
-import { logout } from '../redux/actions/user'
+import { logout } from '../redux/actions/authpersist'
 import { connect } from 'react-redux'
 class Home extends Component {
     constructor(props) {
@@ -18,12 +18,9 @@ class Home extends Component {
         }
     }
     componentDidMount() {
-        // if (!localStorage.getItem('isAuth')) {
-        //     this.props.history.push('/login');
-        // }
-        // if (parseInt(localStorage.getItem('otoritas_id')) !== 1) {
-        //     this.props.history.push('/cashier')
-        // }
+        if (this.props.authpersist.isAuthenticated === false) {
+            this.props.history.push('/login')
+        }
     }
 
     onLogout() {
@@ -36,7 +33,6 @@ class Home extends Component {
         console.log('render');
         return (
             <div className>
-                {/* <p>{this.props.user.persistLogin.name}</p> */}
                 <Navbar onClick={this.onLogout.bind(this)} category={this.state.category} product={this.state.product} page={this.state.page} />
                 <Books />
                 <Pagination category={this.state.category} product={this.state.product} page={this.state.page} />
@@ -47,7 +43,7 @@ class Home extends Component {
 const mapStateToProps = state => {
     console.log('auth', state)
     return {
-        user: state.user
+        authpersist: state.authpersist
     }
 }
 

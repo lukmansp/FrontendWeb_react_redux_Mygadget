@@ -23,13 +23,11 @@ class Navbar extends Component {
         this.props.dispatch(detailProducts(event.target.value, this.state.product, this.state.page))
     }
     onProduct = (event) => {
-        //console.log(event.target.value)
         this.setState({
             product: event.target.value
         })
         this.props.history.push(`?category=${this.state.category}&name=${event.target.value}&pages${this.state.page}`)
         this.props.dispatch(detailProducts(this.state.category, event.target.value, this.state.page))
-        // console.log(this.state.product);
     }
 
 
@@ -52,6 +50,9 @@ class Navbar extends Component {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/history"><i className="fas fa-history"></i></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/charts"><i class="fas fa-chart-line"></i></Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/user"><i className="fas fa-user-cog"></i></Link>

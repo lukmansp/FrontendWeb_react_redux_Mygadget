@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 const ProductItem = ({ order }) => {
-    console.log('order', order)
+    // console.log('order', order)
 
     return (
         <Fragment>

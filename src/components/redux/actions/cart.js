@@ -26,6 +26,15 @@ export const reduceQty = (id) => {
         payload: id
     }
 }
+export const chartHistory = () => {
+    return {
+        type: 'GET_CHART',
+        payload: axios({
+            method: "GET",
+            url: process.env.REACT_APP_URL + "/order/chart"
+        })
+    }
+}
 export const postOrder = (data) => {
     return {
         type: 'POST_ORDER',

@@ -9,3 +9,12 @@ export const getOrder = () => {
         })
     }
 }
+export const chartHistory = () => {
+    return {
+        type: 'GET_CHART',
+        payload: axios({
+            method: "GET",
+            url: process.env.REACT_APP_URL + "/order/chart"
+        })
+    }
+}

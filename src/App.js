@@ -11,6 +11,7 @@ import Product from './components/product/Product';
 import Login from './components/auth/Login';
 import User from './components/user/User';
 import Cashier from './components/home/Cashier';
+import Charts from './components/history/Charts'
 import "./App.css"
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/user" component={User} />
           <Route path="/cashier" component={Cashier} />
+          <Route path="/charts" component={Charts} />
         </Router>
       </PersistGate>
     </Provider>

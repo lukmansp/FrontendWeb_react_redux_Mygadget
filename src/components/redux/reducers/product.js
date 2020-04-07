@@ -6,7 +6,7 @@ const initialState = {
 const product = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_PRODUCTS_FULFILLED':
-            console.log(action.payload);
+            // console.log('paginatedsd', action.payload);
             return {
                 ...state,
                 products: action.payload.data.result,

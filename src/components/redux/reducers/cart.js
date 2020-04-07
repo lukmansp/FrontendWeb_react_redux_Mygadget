@@ -1,9 +1,16 @@
 const initialState = {
     carts: [],
+    chart: [],
     total: 0
 }
 const cart = (state = initialState, action) => {
     switch (action.type) {
+        case 'GET_CART_FULFILLED':
+            return {
+                ...state,
+                chart: action.payload.data
+            }
+
         case 'POST_ORDER_FULFILLED':
             return {
                 ...state

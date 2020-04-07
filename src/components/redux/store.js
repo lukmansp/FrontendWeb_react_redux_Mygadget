@@ -8,9 +8,9 @@ import reducers from './reducers';
 
 const logger = createLogger({});
 const persistConfig = {
-    key: 'user',
+    key: 'authpersist',
     storage,
-    whitelist: ['user']
+    whitelist: ['authpersist']
 }
 const persReducer = persistReducer(persistConfig, reducers)
 

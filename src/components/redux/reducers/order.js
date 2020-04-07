@@ -1,8 +1,9 @@
 const initialState = {
-    order: []
+    order: [],
+    chart: []
 }
 const order = (state = initialState, action) => {
-    console.log(action.type);
+    // console.log(action.type);
     switch (action.type) {
         case 'GET_ORDER_FULFILLED':
             return {
@@ -17,6 +18,21 @@ const order = (state = initialState, action) => {
             return {
                 ...state
             }
+        case 'GET_CHART_FULFILLED':
+            // console.log('chart disini', action.payload.data)
+            return {
+                ...state,
+                chart: action.payload.data.result
+            }
+        case 'GET_CHART_PENDING':
+            return {
+                ...state
+            }
+        case 'GET_CHART_REJECTED':
+            return {
+                ...state
+            }
+
 
         default:
             return state;

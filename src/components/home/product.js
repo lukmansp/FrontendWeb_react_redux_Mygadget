@@ -77,7 +77,7 @@ class Books extends Component {
             })
         })
         const data = {
-            id_user: this.props.user.persistLogin.name,
+            id_user: this.props.authpersist.persistLogin.name,
             total: this.props.total,
             product: product
 
@@ -179,7 +179,8 @@ const mapStateToProps = (state) => {
         carts: state.carts.carts,
         total: state.carts.total,
         deleteCart: state.carts.deleteCart,
-        pagination: state.products.paginate
+        pagination: state.products.paginate,
+        authpersist: state.authpersist
     }
 }
 export default connect(mapStateToProps)(Books);
