@@ -1,4 +1,22 @@
+![web](https://user-images.githubusercontent.com/58159683/78542773-e0439200-7821-11ea-89b8-184d18c6a7d0.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+* link publish: http://mygadget.s3-website-us-east-1.amazonaws.com/login
+```
+email: testing@gmail.conm
+pass: 1234
+```
+
+## Prerequist 
+* clone https://https://github.com/lukmansp/FrontendWeb_react_redux_Mygadget/
+* npm install
+* create new file .env in route folder
+```
+REACT_APP_URL:"localhost:9009"
+```
+
 
 ## Available Scripts
 
@@ -11,6 +29,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### Feature
+* Loign with authorization user with persist
+* Insert, update, delete and search product
+* Order product
+* Manajemen User
+* History order
+
 
 ### `npm test`
 
