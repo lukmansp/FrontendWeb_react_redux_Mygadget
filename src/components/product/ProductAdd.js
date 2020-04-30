@@ -33,15 +33,17 @@ class ProductAdd extends Component {
     data.append('price', this.state.price);
     data.append('stock', this.state.stock);
     await this.props.dispatch(postProduct(data));
+    alert('success added');
     this.props.onHide();
     await this.props.history.push('/product');
   };
 
   render() {
+    const { show, onHide } = this.props;
     return (
-      <Modal show={this.props.show} onHide={this.props.onHandleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+      <Modal show={show} onHide={onHide}>
+        <Modal.Header closeButton onClick={onHide}>
+          <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={this.onSubmit}>
@@ -108,8 +110,11 @@ class ProductAdd extends Component {
               />
             </Form.Group>
             <Modal.Footer>
-              <Button variant='primary' type='submit'>
-                Save Changes
+              <Button variant='secondary' size='sm' onClick={onHide}>
+                Close
+              </Button>
+              <Button variant='primary' size='sm' type='submit'>
+                Save
               </Button>
             </Modal.Footer>
           </Form>

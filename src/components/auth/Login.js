@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions/authpersist';
+import { login, logout } from '../redux/actions/authpersist';
 import image from '../../images/logomygadget.png';
 class Login extends Component {
   constructor(props) {
@@ -12,32 +12,23 @@ class Login extends Component {
       password: '',
     };
   }
-
-  // componentDidMount() {
-  //     if (localStorage.getItem('token')) {
-  //         this.props.history.push('/');
-  //     }
-  // }
-
+  onLogout() {
+    this.props.dispatch(logout());
+  }
+  componentDidMount() {
+    // this.onLogout();
+    const auth = this.props.auth;
+    console.log('ini auth', auth);
+    if (auth < 1) {
+      this.props.history.push('/login');
+    }
+  }
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = async (e) => {
     e.preventDefault();
-    // axios
-    //     .post("http://54.242.170.33/user/login", this.state)
-    //     .then(res => {
-    //         console.log(res.data);
-    //         localStorage.setItem('token', res.data.token);
-    //         localStorage.setItem('user-id', res.data.id);
-    //         localStorage.setItem('otoritas_id', res.data.otoritas_id);
-    //         localStorage.setItem('isAuth', true);
-    //         this.props.history.push('/');
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     })
     await this.props.dispatch(login(this.state));
     this.props.history.push('/');
   };
@@ -81,8 +72,9 @@ class Login extends Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log('ini auth');
   return {
-    auth: state.auth,
+    authpersist: state.authpersist,
   };
 };
 export default connect(mapStateToProps)(Login);

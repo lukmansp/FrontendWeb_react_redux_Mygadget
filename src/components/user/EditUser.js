@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
-
 import { connect } from 'react-redux';
-import { postUser } from '../redux/actions/user';
-
-class UserAdd extends Component {
+import { updateUser, getMenu } from '../redux/actions/user';
+class EditUser extends Component {
   state = {
     name: '',
     email: '',
     password: '',
     otoritas_id: '',
+    created_at: '',
+  };
+  componentWillReceiveProps({ user }) {
+    this.onSetValue(user);
+  }
+
+  onSetValue = (user) => {
+    this.setState({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      otoritas_id: user.access_menu,
+      created_at: user.created_at,
+    });
   };
   onChange = (e) => {
     this.setState({
@@ -18,8 +30,9 @@ class UserAdd extends Component {
   };
   onSubmit = async (e) => {
     e.preventDefault();
-    await this.props.dispatch(postUser(this.state));
-    alert('success added');
+    const id = this.props.user.id;
+    await this.props.dispatch(updateUser(id, this.state));
+    alert('Update sukses');
     await this.props.onHide();
   };
   render() {
@@ -27,13 +40,18 @@ class UserAdd extends Component {
     return (
       <Modal show={show} onHide={onHide} variant='lg'>
         <Modal.Header>
-          <p>Add Book</p>
+          <p>Edit User</p>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={this.onSubmit}>
             <Form.Group>
               <Form.Label>Name</Form.Label>
-              <Form.Control type='text' name='name' onChange={this.onChange} />
+              <Form.Control
+                type='text'
+                name='name'
+                onChange={this.onChange}
+                value={this.state.name}
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>Email</Form.Label>
@@ -41,6 +59,7 @@ class UserAdd extends Component {
                 type='email'
                 name='email'
                 onChange={this.onChange}
+                value={this.state.email}
               />
             </Form.Group>
             <Form.Group>
@@ -51,16 +70,23 @@ class UserAdd extends Component {
                 onChange={this.onChange}
               />
             </Form.Group>
-            <Form.Group controlId='exampleForm.ControlSelect1'>
-              <Form.Label>Category</Form.Label>
+            <Form.Group>
+              <Form.Label>Role</Form.Label>
               <Form.Control
-                as='select'
-                name='category_id'
+                type='text'
+                name='otoritas_id'
                 onChange={this.onChange}
-              >
-                <option value={1}>Admin</option>
-                <option value={2}>Cashier</option>
-              </Form.Control>
+                value={this.state.otoritas_id}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Create at</Form.Label>
+              <Form.Control
+                type='text'
+                name='created_at'
+                onChange={this.onChange}
+                value={this.state.created_at}
+              />
             </Form.Group>
             <Modal.Footer>
               <Button variant='secondary' size='sm' onClick={onHide}>
@@ -76,5 +102,4 @@ class UserAdd extends Component {
     );
   }
 }
-
-export default connect()(UserAdd);
+export default connect()(EditUser);
